@@ -9,7 +9,12 @@
 <meta property="og:title" content="Save the Date – Sophia & Stefan">
 <meta property="og:description" content="10.07.2027 · Schornhof Wolfach">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://lesto17.github.io/save-the-date/">
+<meta property="og:image" content="https://lesto17.github.io/save-the-date/og-image.jpg">
+<meta property="og:image:width" content="800">
+<meta property="og:image:height" content="1128">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lesto17.github.io/save-the-date/og-image.jpg">
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%92%8D</text></svg>">
 
@@ -140,12 +145,17 @@
     "END:VCALENDAR"
   ].join("\r\n");
   const icsLinkEl = document.getElementById('icsLink');
-  icsLinkEl.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
 
-  // iPhone/iPad (Safari) ignoriert das "download"-Attribut bei data-URIs oft und zeigt
-  // stattdessen nur den rohen Text an. Lässt man es dort weg, öffnet iOS die .ics-Datei
-  // direkt im nativen "Termin hinzufügen"-Dialog vom Kalender – genau das wollen wir hier,
-  // da die meisten Gäste iPhones nutzen. Auf Android/Desktop bleibt der echte Datei-Download.
+  // Wichtig: moderne Browser (v.a. iOS Safari) blockieren die direkte Navigation zu
+  // "data:"-Links aus Sicherheitsgründen (Phishing-Schutz) – der Klick passiert dann
+  // einfach gar nichts. Der zuverlässige Weg ist ein Blob: eine im Browser selbst
+  // erzeugte Datei mit eigener, sicherer URL.
+  const icsBlob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+  icsLinkEl.href = URL.createObjectURL(icsBlob);
+
+  // iPhone/iPad (Safari) erkennt den Kalender-Dateityp und öffnet ihn direkt im nativen
+  // "Termin hinzufügen"-Dialog, wenn man NICHT per "download"-Attribut einen Datei-Download
+  // erzwingt. Auf Android/Desktop bleibt der echte Datei-Download über "download" bestehen.
   const isIOS = /iP(hone|od|ad)/.test(navigator.userAgent) ||
     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   if (isIOS) {
