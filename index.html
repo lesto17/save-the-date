@@ -196,13 +196,7 @@
     background: var(--bg);
     border: 1.5px solid var(--pale);
     border-radius: 18px;
-    /* Statt komplett abgeschnitten zu werden, wenn wenig Platz zum Bildschirmrand
-       ist: Höhe begrenzen und intern scrollbar machen. So bleibt sichtbar, dass
-       noch ein zweiter Eintrag folgt, und man kommt trotzdem zu ihm. */
-    max-height: 80px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
+    overflow: hidden;
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
     z-index: 10;
   }
