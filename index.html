@@ -9,6 +9,12 @@
 <meta property="og:title" content="Save the Date – Sophia & Stefan">
 <meta property="og:description" content="10.07.2027 · Schornhof Wolfach">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://lesto17.github.io/save-the-date/">
+<meta property="og:image" content="https://lesto17.github.io/save-the-date/og-image.jpg">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="1000">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lesto17.github.io/save-the-date/og-image.jpg">
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%92%8D</text></svg>">
 
@@ -117,8 +123,8 @@
     color: var(--accent);
     font-size: 78px;
     display: block;
-    margin-top: -10px;
-    margin-right: -22px;
+    margin-top: -6px;
+    margin-right: 6px;
   }
 
   .names {
@@ -137,16 +143,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     font-size: 16px;
     color: var(--white);
     margin-bottom: 26px;
   }
   .meta .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
+    font-size: 10px;
+    color: var(--pale);
+    opacity: 0.85;
+    line-height: 1;
     flex: none;
   }
 
@@ -211,6 +217,14 @@
     line-height: 1.35;
     color: rgba(255, 255, 255, 0.75);
   }
+
+  /* Ab Desktop-Breite: vertikal zentrieren statt oben kleben (auf Mobile bewusst
+     oben ausgerichtet, damit das Kalender-Dropdown ohne Scrollen sichtbar bleibt)
+     und die Karte etwas größer, damit sie auf großen Screens nicht verloren wirkt. */
+  @media (min-width: 700px) {
+    body { align-items: center; }
+    .page { max-width: 560px; }
+  }
 </style>
 </head>
 <body>
@@ -231,7 +245,7 @@
 
   <p class="names">SOPHIA &amp; STEFAN</p>
 
-  <p class="meta"><span>10.07.2027</span><span class="dot"></span><span>Schornhof Wolfach</span></p>
+  <p class="meta"><span>10.07.2027</span><span class="dot">♥</span><span>Schornhof Wolfach</span></p>
 
   <div id="calWrap">
     <button id="calBtn" type="button">Zum Kalender hinzufügen</button>
@@ -255,8 +269,8 @@
   const endLocal   = "20270711T050000";
   const startUTC = "20270710T130000Z";
   const endUTC   = "20270711T030000Z";
-  const venue = "Schornhof, Wolfach";
-  const details  = "Wir freuen uns auf euch! Mehr Infos zum Ort: https://maps.app.goo.gl/Bv9mD9XbjficxnVM7";
+  const venue = "Schornhof, Auf der Grub 1, 77709 Wolfach";
+  const details  = "Wir freuen uns auf euch! Link zur Location: https://maps.app.goo.gl/Bv9mD9XbjficxnVM7";
 
   const googleUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE"
     + "&text=" + encodeURIComponent(title)
