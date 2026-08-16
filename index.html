@@ -263,19 +263,20 @@
 <script>
 (function () {
   const title = "Hochzeit Sophia & Stefan \u{1FAF6}";
-  const startLocal = "20270710T140000";
-  const endLocal   = "20270711T050000";
-  const startUTC = "20270710T120000Z";
-  const endUTC   = "20270711T030000Z";
+  // Ganztägig, da die genaue Uhrzeit noch nicht feststeht. Bei ganztägigen
+  // Terminen ist das Enddatum (sowohl bei Google als auch im ICS-Standard)
+  // exklusiv gemeint, daher hier der 11.07. als Ende für einen Termin, der
+  // nur den 10.07. abdeckt.
+  const startDate = "20270710";
+  const endDate   = "20270711";
   const venue = "Schornhof, Auf der Grub 1, 77709 Wolfach";
   const details  = "Wir freuen uns auf euch! Infos zum Ablauf, zur genauen Uhrzeit und zu Unterkünften folgen. Link zur Location: https://maps.app.goo.gl/Bv9mD9XbjficxnVM7";
 
   const googleUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE"
     + "&text=" + encodeURIComponent(title)
-    + "&dates=" + startLocal + "/" + endLocal
+    + "&dates=" + startDate + "/" + endDate
     + "&details=" + encodeURIComponent(details)
-    + "&location=" + encodeURIComponent(venue)
-    + "&ctz=Europe/Berlin";
+    + "&location=" + encodeURIComponent(venue);
 
   function pad(n) { return String(n).padStart(2, '0'); }
   function toICSStamp(d) {
@@ -302,8 +303,8 @@
     "BEGIN:VEVENT",
     "UID:hochzeit-sophia-stefan-2027@sophiaundstefan-endlichunterderhaube.de",
     "DTSTAMP:" + toICSStamp(new Date()),
-    "DTSTART:" + startUTC,
-    "DTEND:" + endUTC,
+    "DTSTART;VALUE=DATE:" + startDate,
+    "DTEND;VALUE=DATE:" + endDate,
     "SUMMARY:" + icsEscape(title),
     "LOCATION:" + icsEscape(venue),
     "DESCRIPTION:" + icsEscape(details),
